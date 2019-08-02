@@ -50,7 +50,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/JSONWebToken"
+              "$ref": "#/definitions/VerifyJSONWebToken"
             }
           }
         },
