@@ -358,6 +358,12 @@
         "description": "ประเภทธุรกิจของนายจ้าง",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "A unique integer value identifying this ประเภทธุรกิจ.",
