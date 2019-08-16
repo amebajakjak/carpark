@@ -1,0 +1,68 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "TaxBlaster"
+  },
+  "host": "taxblaster.com",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/taxFilings/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the requested TaxFiling",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "auth",
+            "in": "header",
+            "description": "an authorization header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response, with a representation of the Tax Filing.",
+            "schema": {
+              "$ref": "#/definitions/TaxFilingObject"
+            }
+          },
+          "404": {
+            "description": "The requested tax filing was not found."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TaxFilingObject": {
+      "type": "object",
+      "description": "An individual Tax Filing record.",
+      "properties": {
+        "filingID": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "period": {
+          "type": "integer"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "taxpayer": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
