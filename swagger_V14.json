@@ -1,0 +1,2419 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "BPMS API",
+        "description": "",
+        "termsOfService": "https://www.google.com/policies/terms/",
+        "contact": {
+            "email": "wasin@tailor-solutions.com"
+        },
+        "version": "v1"
+    },
+    "host": "bpms.tailor-solutions.com",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        }
+    },
+    "security": [
+        {
+            "Basic": []
+        }
+    ],
+    "paths": {
+        "/api-token-auth/": {
+            "post": {
+                "operationId": "api-token-auth_create",
+                "summary": "API View that receives a POST with a user's username and password.",
+                "description": "Returns a JSON Web Token that can be used for authenticated requests.",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/JSONWebToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/VerifyJSONWebToken"
+                        }
+                    }
+                },
+                "tags": [
+                    "api-token-auth"
+                ]
+            },
+            "parameters": []
+        },
+        "/api-token-refresh/": {
+            "post": {
+                "operationId": "api-token-refresh_create",
+                "summary": "API View that returns a refreshed token (with new expiration) based on\nexisting token",
+                "description": "If 'orig_iat' field (original issued-at-time) is found, will first check\nif it's within expiration window, then copy it to the new token",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RefreshJSONWebToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/RefreshJSONWebToken"
+                        }
+                    }
+                },
+                "tags": [
+                    "api-token-refresh"
+                ]
+            },
+            "parameters": []
+        },
+        "/api-token-verify/": {
+            "post": {
+                "operationId": "api-token-verify_create",
+                "description": "API View that checks the veracity of a token, returning the token if it\nis valid.",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VerifyJSONWebToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/VerifyJSONWebToken"
+                        }
+                    }
+                },
+                "tags": [
+                    "api-token-verify"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/agency/": {
+            "get": {
+                "operationId": "core_agency_list",
+                "description": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e08\u0e32\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07)",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Agency"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "post": {
+                "operationId": "core_agency_create",
+                "description": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e08\u0e32\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07)",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Agency"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Agency"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/agency/{id}/": {
+            "get": {
+                "operationId": "core_agency_read",
+                "description": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e08\u0e32\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07)",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "A unique integer value identifying this \u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Agency"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "put": {
+                "operationId": "core_agency_update",
+                "description": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e08\u0e32\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07)",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Agency"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Agency"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "patch": {
+                "operationId": "core_agency_partial_update",
+                "description": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e08\u0e32\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07)",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Agency"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Agency"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "delete": {
+                "operationId": "core_agency_delete",
+                "description": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e08\u0e32\u0e01\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07)",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/attachment-type/": {
+            "get": {
+                "operationId": "core_attachment-type_list",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\u0e41\u0e19\u0e1a",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/AttachmentType"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/attachment-type/{id}/": {
+            "get": {
+                "operationId": "core_attachment-type_read",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\u0e41\u0e19\u0e1a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "A unique integer value identifying this \u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/AttachmentType"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\u0e41\u0e19\u0e1a.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/business-type/": {
+            "get": {
+                "operationId": "core_business-type_list",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08\u0e02\u0e2d\u0e07\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/BusinessType"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "post": {
+                "operationId": "core_business-type_create",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08\u0e02\u0e2d\u0e07\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BusinessType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/BusinessType"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/business-type/{id}/": {
+            "get": {
+                "operationId": "core_business-type_read",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08\u0e02\u0e2d\u0e07\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "A unique integer value identifying this \u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/BusinessType"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "put": {
+                "operationId": "core_business-type_update",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08\u0e02\u0e2d\u0e07\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BusinessType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/BusinessType"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "patch": {
+                "operationId": "core_business-type_partial_update",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08\u0e02\u0e2d\u0e07\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BusinessType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/BusinessType"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "delete": {
+                "operationId": "core_business-type_delete",
+                "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08\u0e02\u0e2d\u0e07\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/district/": {
+            "get": {
+                "operationId": "core_district_list",
+                "description": "\u0e2d\u0e33\u0e40\u0e20\u0e2d",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/District"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/district/{id}/": {
+            "get": {
+                "operationId": "core_district_read",
+                "description": "\u0e2d\u0e33\u0e40\u0e20\u0e2d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "A unique integer value identifying this \u0e40\u0e02\u0e15/\u0e2d\u0e33\u0e40\u0e20\u0e2d.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/District"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e40\u0e02\u0e15/\u0e2d\u0e33\u0e40\u0e20\u0e2d.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/employer/": {
+            "get": {
+                "operationId": "core_employer_list",
+                "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Employer"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "post": {
+                "operationId": "core_employer_create",
+                "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Employer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Employer"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/employer/{id}/": {
+            "get": {
+                "operationId": "core_employer_read",
+                "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [              
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07.",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Employer"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "put": {
+                "operationId": "core_employer_update",
+                "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Employer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Employer"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "patch": {
+                "operationId": "core_employer_partial_update",
+                "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Employer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Employer"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "delete": {
+                "operationId": "core_employer_delete",
+                "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/nationality/": {
+            "get": {
+                "operationId": "core_nationality_list",
+                "description": "\u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Nationality"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/nationality/{id}/": {
+            "get": {
+                "operationId": "core_nationality_read",
+                "description": "\u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34",
+                "parameters": [                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34.",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Nationality"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/province/": {
+            "get": {
+                "operationId": "core_province_list",
+                "description": "\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Province"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/province/{id}/": {
+            "get": {
+                "operationId": "core_province_read",
+                "description": "\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14",
+                "parameters": [                
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14.",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Province"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/region/": {
+            "get": {
+                "operationId": "core_region_list",
+                "description": "\u0e20\u0e39\u0e21\u0e34\u0e20\u0e32\u0e04",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Region"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/region/{id}/": {
+            "get": {
+                "operationId": "core_region_read",
+                "description": "\u0e20\u0e39\u0e21\u0e34\u0e20\u0e32\u0e04",
+                "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e20\u0e32\u0e04.",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Region"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e20\u0e32\u0e04.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/sub-district/": {
+            "get": {
+                "operationId": "core_sub-district_list",
+                "description": "\u0e15\u0e33\u0e1a\u0e25",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SubDistrict"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/sub-district/{id}/": {
+            "get": {
+                "operationId": "core_sub-district_read",
+                "description": "\u0e15\u0e33\u0e1a\u0e25",
+                "parameters": [   
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e41\u0e02\u0e27\u0e07/\u0e15\u0e33\u0e1a\u0e25.",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/SubDistrict"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e41\u0e02\u0e27\u0e07/\u0e15\u0e33\u0e1a\u0e25.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/core/thai-address/": {
+            "get": {
+                "operationId": "core_thai-address_list",
+                "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ThaiAddress"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "post": {
+                "operationId": "core_thai-address_create",
+                "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ThaiAddress"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ThaiAddress"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": []
+        },
+        "/core/thai-address/{id}/": {
+            "get": {
+                "operationId": "core_thai-address_read",
+                "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
+                "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22.",
+                    "required": true,
+                    "type": "integer"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ThaiAddress"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "put": {
+                "operationId": "core_thai-address_update",
+                "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ThaiAddress"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ThaiAddress"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "patch": {
+                "operationId": "core_thai-address_partial_update",
+                "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ThaiAddress"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ThaiAddress"
+                        }
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "delete": {
+                "operationId": "core_thai-address_delete",
+                "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "core"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/demand/application-current-worker/": {
+            "get": {
+                "operationId": "demand_application-current-worker_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CurrentWorker"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "post": {
+                "operationId": "demand_application-current-worker_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CurrentWorker"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentWorker"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": []
+        },
+        "/demand/application-current-worker/{id}/": {
+            "get": {
+                "operationId": "demand_application-current-worker_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentWorker"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "put": {
+                "operationId": "demand_application-current-worker_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CurrentWorker"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentWorker"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "patch": {
+                "operationId": "demand_application-current-worker_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CurrentWorker"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentWorker"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "delete": {
+                "operationId": "demand_application-current-worker_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this current worker.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/demand/application-form-attachment/": {
+            "get": {
+                "operationId": "demand_application-form-attachment_list",
+                "description": "Application Form Attachment",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApplicationFormAttachment"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "post": {
+                "operationId": "demand_application-form-attachment_create",
+                "description": "Application Form Attachment",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationFormAttachment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationFormAttachment"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": []
+        },
+        "/demand/application-form-attachment/{id}/": {
+            "get": {
+                "operationId": "demand_application-form-attachment_read",
+                "description": "Application Form Attachment",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationFormAttachment"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "put": {
+                "operationId": "demand_application-form-attachment_update",
+                "description": "Application Form Attachment",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationFormAttachment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationFormAttachment"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "patch": {
+                "operationId": "demand_application-form-attachment_partial_update",
+                "description": "Application Form Attachment",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationFormAttachment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationFormAttachment"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "delete": {
+                "operationId": "demand_application-form-attachment_delete",
+                "description": "Application Form Attachment",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this application form attachment.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/demand/application-form/": {
+            "get": {
+                "operationId": "demand_application-form_list",
+                "description": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2a\u0e21\u0e31\u0e04\u0e23 Demand process",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ApplicationForm"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "post": {
+                "operationId": "demand_application-form_create",
+                "description": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2a\u0e21\u0e31\u0e04\u0e23 Demand process",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationForm"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": []
+        },
+        "/demand/application-form/{id}/": {
+            "get": {
+                "operationId": "demand_application-form_read",
+                "description": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2a\u0e21\u0e31\u0e04\u0e23 Demand process",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationForm"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "put": {
+                "operationId": "demand_application-form_update",
+                "description": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2a\u0e21\u0e31\u0e04\u0e23 Demand process",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationForm"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "patch": {
+                "operationId": "demand_application-form_partial_update",
+                "description": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2a\u0e21\u0e31\u0e04\u0e23 Demand process",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationForm"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "delete": {
+                "operationId": "demand_application-form_delete",
+                "description": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2a\u0e21\u0e31\u0e04\u0e23 Demand process",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this \u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e2a\u0e21\u0e31\u0e04\u0e23 MOU Demand Process.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/demand/demand-process/": {
+            "get": {
+                "operationId": "demand_demand-process_list",
+                "description": "Demand Process",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/DemandProcess"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "post": {
+                "operationId": "demand_demand-process_create",
+                "description": "Demand Process",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DemandProcess"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DemandProcess"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": []
+        },
+        "/demand/demand-process/{id}/": {
+            "get": {
+                "operationId": "demand_demand-process_read",
+                "description": "Demand Process",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DemandProcess"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "put": {
+                "operationId": "demand_demand-process_update",
+                "description": "Demand Process",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DemandProcess"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DemandProcess"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "patch": {
+                "operationId": "demand_demand-process_partial_update",
+                "description": "Demand Process",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DemandProcess"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/DemandProcess"
+                        }
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "delete": {
+                "operationId": "demand_demand-process_delete",
+                "description": "Demand Process",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this Demand Process.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/demand/generate-application-form/{id}/": {
+            "get": {
+                "operationId": "demand_generate-application-form_read",
+                "description": "Generate the application form into PDF file",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "demand"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "JSONWebToken": {
+            "required": [
+                "username",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "username": {
+                    "title": "Username",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "password": {
+                    "title": "Password",
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
+        "RefreshJSONWebToken": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "title": "Token",
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
+        "VerifyJSONWebToken": {
+            "required": [
+                "token"
+            ],
+            "type": "object",
+            "properties": {
+                "token": {
+                    "title": "Token",
+                    "type": "string",
+                    "minLength": 1
+                }
+            }
+        },
+        "Agency": {
+            "required": [
+                "name_th",
+                "name_en",
+                "address_th",
+                "address_en"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "address_th": {
+                    "title": "Address th",
+                    "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e15\u0e48\u0e32\u0e07\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "address_en": {
+                    "title": "Address en",
+                    "description": "\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e15\u0e48\u0e32\u0e07\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                }
+            }
+        },
+        "AttachmentType": {
+            "required": [
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                }
+            }
+        },
+        "BusinessType": {
+            "required": [
+                "name_th",
+                "name_en"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e18\u0e38\u0e23\u0e01\u0e34\u0e08 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                }
+            }
+        },
+        "District": {
+            "required": [
+                "name_th",
+                "name_en",
+                "province"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "province": {
+                    "title": "Province",
+                    "type": "integer"
+                }
+            }
+        },
+        "Employer": {
+            "required": [
+                "name_th",
+                "name_en",
+                "taxpayer_id",
+                "individual_name_th",
+                "individual_name_en",
+                "business_type",
+                "address"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07\u0e2b\u0e23\u0e37\u0e2d\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07\u0e2b\u0e23\u0e37\u0e2d\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "taxpayer_id": {
+                    "title": "Taxpayer id",
+                    "description": "\u0e40\u0e25\u0e02\u0e1b\u0e23\u0e30\u0e08\u0e33\u0e15\u0e31\u0e27\u0e1c\u0e39\u0e49\u0e40\u0e2a\u0e35\u0e22\u0e20\u0e32\u0e29\u0e35 (\u0e19\u0e34\u0e15\u0e34\u0e1a\u0e38\u0e04\u0e04\u0e25)",
+                    "type": "string",
+                    "maxLength": 1000,
+                    "minLength": 1
+                },
+                "individual_name_th": {
+                    "title": "Individual name th",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07 (\u0e01\u0e23\u0e23\u0e21\u0e01\u0e32\u0e23) (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "individual_name_en": {
+                    "title": "Individual name en",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07 (\u0e01\u0e23\u0e23\u0e21\u0e01\u0e32\u0e23) (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "minLength": 1
+                },
+                "individual_id": {
+                    "title": "Individual id",
+                    "description": "\u0e40\u0e25\u0e02\u0e1a\u0e31\u0e15\u0e23\u0e1b\u0e23\u0e30\u0e0a\u0e32\u0e0a\u0e19/\u0e2b\u0e19\u0e31\u0e07\u0e2a\u0e37\u0e2d\u0e40\u0e14\u0e34\u0e19\u0e17\u0e32\u0e07 (\u0e01\u0e23\u0e23\u0e21\u0e01\u0e32\u0e23)",
+                    "type": "string",
+                    "maxLength": 1000,
+                    "x-nullable": true
+                },
+                "telephone": {
+                    "title": "Telephone",
+                    "type": "string",
+                    "maxLength": 500,
+                    "x-nullable": true
+                },
+                "fax": {
+                    "title": "Fax",
+                    "type": "string",
+                    "maxLength": 500,
+                    "x-nullable": true
+                },
+                "business_type": {
+                    "title": "Business type",
+                    "type": "integer"
+                },
+                "address": {
+                    "title": "Address",
+                    "type": "integer"
+                }
+            }
+        },
+        "Nationality": {
+            "required": [
+                "name_th",
+                "name_en"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                }
+            }
+        },
+        "Province": {
+            "required": [
+                "name_th",
+                "name_en",
+                "region"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "region": {
+                    "title": "Region",
+                    "type": "integer"
+                }
+            }
+        },
+        "Region": {
+            "required": [
+                "name_th",
+                "name_en"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                }
+            }
+        },
+        "SubDistrict": {
+            "required": [
+                "name_th",
+                "name_en",
+                "zip_code",
+                "district"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "name_th": {
+                    "title": "Name th",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "name_en": {
+                    "title": "Name en",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "zip_code": {
+                    "title": "Zip code",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "district": {
+                    "title": "District",
+                    "type": "integer"
+                }
+            }
+        },
+        "ThaiAddress": {
+            "required": [
+                "no",
+                "sub_district"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "no": {
+                    "title": "No",
+                    "description": "\u0e40\u0e25\u0e02\u0e17\u0e35\u0e48",
+                    "type": "string",
+                    "maxLength": 500,
+                    "minLength": 1
+                },
+                "building": {
+                    "title": "Building",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e2d\u0e32\u0e04\u0e32\u0e23/\u0e2b\u0e21\u0e39\u0e48\u0e1a\u0e49\u0e32\u0e19",
+                    "type": "string",
+                    "maxLength": 1000,
+                    "x-nullable": true
+                },
+                "floor": {
+                    "title": "Floor",
+                    "description": "\u0e0a\u0e31\u0e49\u0e19\u0e17\u0e35\u0e48",
+                    "type": "string",
+                    "maxLength": 500,
+                    "x-nullable": true
+                },
+                "moo": {
+                    "title": "Moo",
+                    "description": "\u0e2b\u0e21\u0e39\u0e48\u0e17\u0e35\u0e48",
+                    "type": "string",
+                    "maxLength": 500,
+                    "x-nullable": true
+                },
+                "soi_th": {
+                    "title": "Soi th",
+                    "description": "\u0e0b\u0e2d\u0e22 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "soi_en": {
+                    "title": "Soi en",
+                    "description": "\u0e0b\u0e2d\u0e22 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "road_th": {
+                    "title": "Road th",
+                    "description": "\u0e16\u0e19\u0e19 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "road_en": {
+                    "title": "Road en",
+                    "description": "\u0e16\u0e19\u0e19 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "sub_district": {
+                    "title": "Sub district",
+                    "type": "integer"
+                }
+            }
+        },
+        "CurrentWorker": {
+            "required": [
+                "application_form",
+                "nationality"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "current_labourer_male": {
+                    "title": "Current labourer male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e01\u0e23\u0e23\u0e21\u0e01\u0e23 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_labourer_female": {
+                    "title": "Current labourer female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e01\u0e23\u0e23\u0e21\u0e01\u0e23 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_domestic_worker_male": {
+                    "title": "Current domestic worker male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e23\u0e31\u0e1a\u0e43\u0e0a\u0e49\u0e43\u0e19\u0e1a\u0e49\u0e32\u0e19 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_domestic_worker_female": {
+                    "title": "Current domestic worker female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e23\u0e31\u0e1a\u0e43\u0e0a\u0e49\u0e43\u0e19\u0e1a\u0e49\u0e32\u0e19 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_mechanic_fishing_male": {
+                    "title": "Current mechanic fishing male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e48\u0e32\u0e07\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e43\u0e19\u0e40\u0e23\u0e37\u0e2d\u0e1b\u0e23\u0e30\u0e21\u0e07 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_mechanic_fishing_female": {
+                    "title": "Current mechanic fishing female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e48\u0e32\u0e07\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e43\u0e19\u0e40\u0e23\u0e37\u0e2d\u0e1b\u0e23\u0e30\u0e21\u0e07 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_other_male": {
+                    "title": "Current other male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_other_female": {
+                    "title": "Current other female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "current_other_name_th": {
+                    "title": "Current other name th",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e07\u0e32\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "current_other_name_en": {
+                    "title": "Current other name en",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e07\u0e32\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "application_form": {
+                    "title": "Application form",
+                    "description": "\u0e41\u0e1a\u0e1a\u0e1f\u0e2d\u0e23\u0e4c\u0e21\u0e25\u0e07\u0e17\u0e30\u0e40\u0e1a\u0e35\u0e22\u0e19\u0e17\u0e35\u0e48\u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e02\u0e49\u0e2d\u0e07",
+                    "type": "integer"
+                },
+                "nationality": {
+                    "title": "Nationality",
+                    "description": "\u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34\u0e02\u0e2d\u0e07\u0e25\u0e39\u0e01\u0e08\u0e49\u0e32\u0e07",
+                    "type": "integer"
+                }
+            }
+        },
+        "ApplicationFormAttachment": {
+            "required": [
+                "file",
+                "application_form",
+                "attachment_type"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "file": {
+                    "title": "File",
+                    "type": "string"
+                },
+                "application_form": {
+                    "title": "Application form",
+                    "type": "integer"
+                },
+                "attachment_type": {
+                    "title": "Attachment type",
+                    "type": "integer"
+                }
+            }
+        },
+        "ApplicationForm": {
+            "required": [
+                "qualification_age_from",
+                "qualification_age_to",
+                "qualification_height_from",
+                "qualification_height_to",
+                "qualification_weight_from",
+                "qualification_weight_to",
+                "period_of_employment_year",
+                "wage",
+                "working_hour",
+                "weekly_holiday",
+                "thai_official_holiday",
+                "immigration_checkpoint_th",
+                "immigration_checkpoint_en",
+                "power_of_attroney_withness_th",
+                "power_of_attroney_withness_en",
+                "demand_process",
+                "place_of_work",
+                "traning_province"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "agency_power_attroney_date": {
+                    "title": "Agency power attroney date",
+                    "description": "\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48\u0e43\u0e19\u0e2b\u0e19\u0e31\u0e07\u0e2a\u0e37\u0e2d\u0e41\u0e15\u0e48\u0e07\u0e15\u0e31\u0e49\u0e07\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07",
+                    "type": "string",
+                    "format": "date",
+                    "x-nullable": true
+                },
+                "labourer_male": {
+                    "title": "Labourer male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e01\u0e23\u0e23\u0e21\u0e01\u0e23 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "labourer_female": {
+                    "title": "Labourer female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e01\u0e23\u0e23\u0e21\u0e01\u0e23 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "domestic_worker_male": {
+                    "title": "Domestic worker male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e23\u0e31\u0e1a\u0e43\u0e0a\u0e49\u0e43\u0e19\u0e1a\u0e49\u0e32\u0e19 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "domestic_worker_female": {
+                    "title": "Domestic worker female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e23\u0e31\u0e1a\u0e43\u0e0a\u0e49\u0e43\u0e19\u0e1a\u0e49\u0e32\u0e19 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "mechanic_fishing_male": {
+                    "title": "Mechanic fishing male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e48\u0e32\u0e07\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e43\u0e19\u0e40\u0e23\u0e37\u0e2d\u0e1b\u0e23\u0e30\u0e21\u0e07 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "mechanic_fishing_female": {
+                    "title": "Mechanic fishing female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e0a\u0e48\u0e32\u0e07\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e22\u0e19\u0e15\u0e4c\u0e43\u0e19\u0e40\u0e23\u0e37\u0e2d\u0e1b\u0e23\u0e30\u0e21\u0e07 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "other_male": {
+                    "title": "Other male",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (\u0e0a\u0e32\u0e22)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "other_female": {
+                    "title": "Other female",
+                    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (\u0e2b\u0e0d\u0e34\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "other_name_th": {
+                    "title": "Other name th",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e07\u0e32\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (th)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "other_name_en": {
+                    "title": "Other name en",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e07\u0e32\u0e19\u0e2d\u0e37\u0e48\u0e19\u0e46 (en)",
+                    "type": "string",
+                    "maxLength": 3000,
+                    "x-nullable": true
+                },
+                "qualification_age_from": {
+                    "title": "Qualification age from",
+                    "description": "\u0e04\u0e38\u0e13\u0e2a\u0e21\u0e1a\u0e31\u0e15\u0e34\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 (\u0e2d\u0e32\u0e22\u0e38\u0e15\u0e31\u0e49\u0e07\u0e41\u0e15\u0e48)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "qualification_age_to": {
+                    "title": "Qualification age to",
+                    "description": "\u0e04\u0e38\u0e13\u0e2a\u0e21\u0e1a\u0e31\u0e15\u0e34\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 (\u0e2d\u0e32\u0e22\u0e38\u0e16\u0e36\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "qualification_height_from": {
+                    "title": "Qualification height from",
+                    "description": "\u0e04\u0e38\u0e13\u0e2a\u0e21\u0e1a\u0e31\u0e15\u0e34\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 (\u0e2a\u0e48\u0e27\u0e19\u0e2a\u0e39\u0e07\u0e15\u0e31\u0e49\u0e07\u0e41\u0e15\u0e48)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "qualification_height_to": {
+                    "title": "Qualification height to",
+                    "description": "\u0e04\u0e38\u0e13\u0e2a\u0e21\u0e1a\u0e31\u0e15\u0e34\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 (\u0e2a\u0e48\u0e27\u0e19\u0e2a\u0e39\u0e07\u0e16\u0e36\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "qualification_weight_from": {
+                    "title": "Qualification weight from",
+                    "description": "\u0e04\u0e38\u0e13\u0e2a\u0e21\u0e1a\u0e31\u0e15\u0e34\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 (\u0e19\u0e49\u0e33\u0e2b\u0e19\u0e31\u0e01\u0e15\u0e31\u0e49\u0e07\u0e41\u0e15\u0e48)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "qualification_weight_to": {
+                    "title": "Qualification weight to",
+                    "description": "\u0e04\u0e38\u0e13\u0e2a\u0e21\u0e1a\u0e31\u0e15\u0e34\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 (\u0e19\u0e49\u0e33\u0e2b\u0e19\u0e31\u0e01\u0e16\u0e36\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "period_of_employment_year": {
+                    "title": "Period of employment year",
+                    "description": "\u0e23\u0e30\u0e22\u0e30\u0e40\u0e27\u0e25\u0e32\u0e01\u0e32\u0e23\u0e08\u0e49\u0e32\u0e07 (\u0e1b\u0e35)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "wage": {
+                    "title": "Wage",
+                    "description": "\u0e04\u0e48\u0e32\u0e08\u0e49\u0e32\u0e07",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "working_hour": {
+                    "title": "Working hour",
+                    "description": "\u0e0a\u0e31\u0e48\u0e27\u0e42\u0e21\u0e07\u0e01\u0e32\u0e23\u0e17\u0e33\u0e07\u0e32\u0e19 (\u0e0a\u0e31\u0e48\u0e27\u0e42\u0e21\u0e07)",
+                    "type": "integer",
+                    "maximum": 2147483647,
+                    "minimum": -2147483648
+                },
+                "weekly_holiday": {
+                    "title": "Weekly holiday",
+                    "description": "\u0e27\u0e31\u0e19\u0e2b\u0e22\u0e38\u0e14\u0e1b\u0e23\u0e30\u0e08\u0e33\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c (\u0e27\u0e31\u0e19)",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "thai_official_holiday": {
+                    "title": "Thai official holiday",
+                    "description": "\u0e27\u0e31\u0e19\u0e2b\u0e22\u0e38\u0e14\u0e15\u0e32\u0e21\u0e1b\u0e23\u0e30\u0e40\u0e1e\u0e13\u0e35 (\u0e27\u0e31\u0e19)",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "immigration_checkpoint_th": {
+                    "title": "\u0e14\u0e48\u0e32\u0e19\u0e15\u0e23\u0e27\u0e08\u0e04\u0e19\u0e40\u0e02\u0e49\u0e32\u0e40\u0e21\u0e37\u0e2d\u0e07 (\u0e44\u0e17\u0e22)",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "immigration_checkpoint_en": {
+                    "title": "\u0e14\u0e48\u0e32\u0e19\u0e15\u0e23\u0e27\u0e08\u0e04\u0e19\u0e40\u0e02\u0e49\u0e32\u0e40\u0e21\u0e37\u0e2d\u0e07 (\u0e2d\u0e31\u0e07\u0e01\u0e24\u0e29)",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "power_of_attroney_withness_th": {
+                    "title": "Power of attroney withness th",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e1e\u0e22\u0e32\u0e19\u0e43\u0e19\u0e2b\u0e19\u0e31\u0e07\u0e2a\u0e37\u0e2d\u0e41\u0e15\u0e48\u0e07\u0e15\u0e31\u0e49\u0e07 (th)",
+                    "type": "string",
+                    "maxLength": 5000,
+                    "minLength": 1
+                },
+                "power_of_attroney_withness_en": {
+                    "title": "Power of attroney withness en",
+                    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e1e\u0e22\u0e32\u0e19\u0e43\u0e19\u0e2b\u0e19\u0e31\u0e07\u0e2a\u0e37\u0e2d\u0e41\u0e15\u0e48\u0e07\u0e15\u0e31\u0e49\u0e07 (en)",
+                    "type": "string",
+                    "maxLength": 5000,
+                    "minLength": 1
+                },
+                "demand_process": {
+                    "title": "Demand process",
+                    "type": "integer"
+                },
+                "place_of_work": {
+                    "title": "Place of work",
+                    "description": "\u0e2a\u0e16\u0e32\u0e19\u0e17\u0e35\u0e48\u0e17\u0e33\u0e07\u0e32\u0e19\u0e43\u0e19\u0e44\u0e17\u0e22",
+                    "type": "integer"
+                },
+                "traning_province": {
+                    "title": "Traning province",
+                    "description": "\u0e28\u0e39\u0e19\u0e22\u0e4c\u0e1b\u0e23\u0e30\u0e08\u0e33\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14\u0e17\u0e35\u0e48\u0e40\u0e02\u0e49\u0e32\u0e2d\u0e1a\u0e23\u0e21",
+                    "type": "integer"
+                }
+            }
+        },
+        "DemandProcess": {
+            "required": [
+                "employer",
+                "nationality",
+                "agency"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "employer": {
+                    "title": "Employer",
+                    "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
+                    "type": "integer"
+                },
+                "nationality": {
+                    "title": "Nationality",
+                    "description": "\u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34",
+                    "type": "integer"
+                },
+                "agency": {
+                    "title": "Agency",
+                    "description": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e15\u0e49\u0e19\u0e17\u0e32\u0e07",
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
