@@ -296,7 +296,7 @@
                         "required": true,
                         "type": "integer"
                     }
-                ],              
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -498,7 +498,7 @@
                         "required": true,
                         "type": "integer"
                     }
-                ], 
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -572,14 +572,15 @@
             "get": {
                 "operationId": "core_employer_read",
                 "description": "\u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07",
-                "parameters": [              
+                "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "description": "A unique integer value identifying this \u0e19\u0e32\u0e22\u0e08\u0e49\u0e32\u0e07.",
                         "required": true,
                         "type": "integer"
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -691,13 +692,15 @@
             "get": {
                 "operationId": "core_nationality_read",
                 "description": "\u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34",
-                "parameters": [                {
-                    "name": "id",
-                    "in": "path",
-                    "description": "A unique integer value identifying this \u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34.",
-                    "required": true,
-                    "type": "integer"
-                }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "A unique integer value identifying this \u0e2a\u0e31\u0e0d\u0e0a\u0e32\u0e15\u0e34.",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -746,14 +749,15 @@
             "get": {
                 "operationId": "core_province_read",
                 "description": "\u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14",
-                "parameters": [                
+                "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "description": "A unique integer value identifying this \u0e08\u0e31\u0e07\u0e2b\u0e27\u0e31\u0e14.",
                         "required": true,
                         "type": "integer"
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -809,7 +813,8 @@
                         "description": "A unique integer value identifying this \u0e20\u0e32\u0e04.",
                         "required": true,
                         "type": "integer"
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -858,14 +863,15 @@
             "get": {
                 "operationId": "core_sub-district_read",
                 "description": "\u0e15\u0e33\u0e1a\u0e25",
-                "parameters": [   
+                "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "description": "A unique integer value identifying this \u0e41\u0e02\u0e27\u0e07/\u0e15\u0e33\u0e1a\u0e25.",
                         "required": true,
                         "type": "integer"
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -946,7 +952,8 @@
                         "description": "A unique integer value identifying this \u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e43\u0e19\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22.",
                         "required": true,
                         "type": "integer"
-                    }],
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "",
@@ -1447,7 +1454,14 @@
             "get": {
                 "operationId": "demand_generate-application-form_read",
                 "description": "Generate the application form into PDF file",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": ""
