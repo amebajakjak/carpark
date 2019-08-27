@@ -1465,8 +1465,13 @@
                 "responses":{
                 "200":{
                     "description": "Returns PDF",
-                    "schema": {
-                        "type": "string"
+                    "content":{
+                        "application/pdf":{
+                            "schema": {
+                                "type": "string",
+                                "format":"binary"
+                            }
+                        }
                     }
                 }
             }
