@@ -1466,7 +1466,7 @@
                 "200":{
                     "description": "Returns a PDF file",
                     "schema": {
-                        "type": "file",
+                        "type": "string",
                         "format": "base64"
                     }
                 }
