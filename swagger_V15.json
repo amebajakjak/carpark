@@ -1466,7 +1466,7 @@
                 "200":{
                     "description": "Returns PDF",
                     "schema": {
-                        "type": "file"
+                        "type": "string"
                     }
                 }
             }
