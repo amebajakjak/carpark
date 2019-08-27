@@ -1464,11 +1464,12 @@
                 ],
                 "responses":{
                 "200":{
-                    "description": "Returns PDF",
+                    "description": "Returns a PDF file",
                     "content":{
                         "application/pdf":{
                             "schema": {
-                                "type": "string"
+                                "type": "file",
+                                "format": "base64"
                             }
                         }
                     }
