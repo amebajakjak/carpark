@@ -1465,13 +1465,9 @@
                 "responses":{
                 "200":{
                     "description": "Returns a PDF file",
-                    "content":{
-                        "application/pdf":{
-                            "schema": {
-                                "type": "file",
-                                "format": "base64"
-                            }
-                        }
+                    "schema": {
+                        "type": "file",
+                        "format": "base64"
                     }
                 }
             }
