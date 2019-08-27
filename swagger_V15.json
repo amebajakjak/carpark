@@ -1462,11 +1462,15 @@
                         "type": "string"
                     }
                 ],
-                "responses": {
-                    "200": {
-                        "description": ""
+                "responses":{
+                "200":{
+                    "description": "Returns PDF",
+                    "schema": {
+                        "type": "file"
                     }
-                },
+                }
+            }
+                ,
                 "tags": [
                     "demand"
                 ]
