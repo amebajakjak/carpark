@@ -1531,7 +1531,10 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "schema":{
+              "type":"string"
+            }
           }
         },
         "tags": [
