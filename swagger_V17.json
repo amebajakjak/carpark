@@ -1533,8 +1533,7 @@
           "200": {
             "description": "A PDF file.",
             "schema": {
-              "type": "string",
-              "format": "base64"
+              "type": "string"
             }
           }
         },
