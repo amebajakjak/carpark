@@ -1531,10 +1531,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A PDF file.",
-            "schema": {
-              "type": "string"
-            }
+            "description": ""
           }
         },
         "tags": [
