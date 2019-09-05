@@ -1521,11 +1521,22 @@
       "get": {
         "operationId": "demand_generate-application-form_read",
         "description": "Generate the application form into PDF file",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Returns PDF",
+            "schema": {
+              "type": "file"
+            }
           }
+          
         },
         "tags": [
           "demand"
