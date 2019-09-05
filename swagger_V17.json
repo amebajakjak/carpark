@@ -1521,6 +1521,9 @@
       "get": {
         "operationId": "demand_generate-application-form_read",
         "description": "Generate the application form into PDF file",
+        "produces": [
+          "application/pdf"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1532,8 +1535,8 @@
         "responses": {
           "200": {
             "description": "",
-            "schema":{
-              "type":"file"
+            "schema": {
+              "type": "file"
             }
           }
         },
