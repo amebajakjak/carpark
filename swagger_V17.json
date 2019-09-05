@@ -1529,14 +1529,16 @@
             "type": "string"
           }
         ],
+        "produces": [
+          "application/pdf"
+        ],
         "responses": {
           "200": {
-            "description": "Returns PDF",
+            "description": "A PDF file.",
             "schema": {
               "type": "file"
             }
           }
-          
         },
         "tags": [
           "demand"
