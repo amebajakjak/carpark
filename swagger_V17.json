@@ -1536,7 +1536,8 @@
           "200": {
             "description": "A PDF file.",
             "schema": {
-              "type": "file"
+              "type": "string",
+              "format": "base64"
             }
           }
         },
