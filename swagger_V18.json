@@ -3146,7 +3146,6 @@
     },
     "ApplicationForm": {
       "required": [
-        "agency_power_attroney_date",
         "qualification_age_from",
         "qualification_age_to",
         "qualification_height_from",
