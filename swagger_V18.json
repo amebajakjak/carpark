@@ -9,7 +9,7 @@
     },
     "version": "v1"
   },
-  "host": "bpms.tailor-solutions.com",
+  "host": "bpms.tailor-solutions.com:8000",
   "schemes": [
     "https"
   ],
