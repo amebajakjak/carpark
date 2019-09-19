@@ -11,7 +11,7 @@
   },
   "host": "bpms.tailor-solutions.com:8000",
   "schemes": [
-    "https"
+    "http"
   ],
   "basePath": "/",
   "consumes": [
