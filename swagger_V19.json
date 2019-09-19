@@ -1,0 +1,3612 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BPMS API",
+    "description": "",
+    "termsOfService": "https://www.google.com/policies/terms/",
+    "contact": {
+      "email": "wasin@tailor-solutions.com"
+    },
+    "version": "v1"
+  },
+  "host": "167.71.219.248:8000",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Basic": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "Basic": []
+    }
+  ],
+  "paths": {
+    "/api-token-auth/": {
+      "post": {
+        "operationId": "api-token-auth_create",
+        "summary": "API View that receives a POST with a user's username and password.",
+        "description": "Returns a JSON Web Token that can be used for authenticated requests.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JSONWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/VerifyJSONWebToken"
+            }
+          }
+        },
+        "tags": [
+          "api-token-auth"
+        ]
+      },
+      "parameters": []
+    },
+    "/api-token-refresh/": {
+      "post": {
+        "operationId": "api-token-refresh_create",
+        "summary": "API View that returns a refreshed token (with new expiration) based on\nexisting token",
+        "description": "If 'orig_iat' field (original issued-at-time) is found, will first check\nif it's within expiration window, then copy it to the new token",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RefreshJSONWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RefreshJSONWebToken"
+            }
+          }
+        },
+        "tags": [
+          "api-token-refresh"
+        ]
+      },
+      "parameters": []
+    },
+    "/api-token-verify/": {
+      "post": {
+        "operationId": "api-token-verify_create",
+        "description": "API View that checks the veracity of a token, returning the token if it\nis valid.",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyJSONWebToken"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/VerifyJSONWebToken"
+            }
+          }
+        },
+        "tags": [
+          "api-token-verify"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/active-passport/{employee_id}/": {
+      "get": {
+        "operationId": "core_active-passport_list",
+        "description": "Passport ที่ active ของลูกจ้าง",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "ID of the employee for filter",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The filtered passport",
+            "schema": {
+              "$ref": "#/definitions/Passport"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "employee_id",
+          "in": "path",
+          "description": "ลูกจ้าง",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/core/active-visa/{employee_id}/": {
+      "get": {
+        "operationId": "core_active-visa_list",
+        "description": "Visa ที่ active ของลูกจ้าง",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "ID of the employee for filter",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The filtered visa",
+            "schema": {
+              "$ref": "#/definitions/Passport"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "employee_id",
+          "in": "path",
+          "description": "ลูกจ้าง",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/core/agency/": {
+      "get": {
+        "operationId": "core_agency_list",
+        "description": "บริษัทต้นทาง (บริษัทจากประเทศต้นทาง)",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Agency"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "post": {
+        "operationId": "core_agency_create",
+        "description": "บริษัทต้นทาง (บริษัทจากประเทศต้นทาง)",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/agency/{id}/": {
+      "get": {
+        "operationId": "core_agency_read",
+        "description": "บริษัทต้นทาง (บริษัทจากประเทศต้นทาง)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this บริษัทประเทศต้นทาง.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "put": {
+        "operationId": "core_agency_update",
+        "description": "บริษัทต้นทาง (บริษัทจากประเทศต้นทาง)",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "patch": {
+        "operationId": "core_agency_partial_update",
+        "description": "บริษัทต้นทาง (บริษัทจากประเทศต้นทาง)",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "delete": {
+        "operationId": "core_agency_delete",
+        "description": "บริษัทต้นทาง (บริษัทจากประเทศต้นทาง)",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this บริษัทประเทศต้นทาง.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/all-passport/{employee_id}/": {
+      "get": {
+        "operationId": "core_all-passport_list",
+        "description": "Passport ทั้งหมดของลูกจ้าง",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "ID of the employee for filter",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of filtered passport",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Passport"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "employee_id",
+          "in": "path",
+          "description": "ลูกจ้าง",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/core/all-visa/{employee_id}/": {
+      "get": {
+        "operationId": "core_all-visa_list",
+        "description": "Visa ทั้งหมดของลูกจ้าง",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "description": "ID of the employee for filter",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of filtered visa",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Passport"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "employee_id",
+          "in": "path",
+          "description": "ลูกจ้าง",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/core/attachment-type/": {
+      "get": {
+        "operationId": "core_attachment-type_list",
+        "description": "ประเภทเอกสารแนบ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AttachmentType"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/attachment-type/{id}/": {
+      "get": {
+        "operationId": "core_attachment-type_read",
+        "description": "ประเภทเอกสารแนบ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this ประเภทธุรกิจ.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AttachmentType"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this ประเภทเอกสารแนบ.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/business-type/": {
+      "get": {
+        "operationId": "core_business-type_list",
+        "description": "ประเภทธุรกิจของนายจ้าง",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BusinessType"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "post": {
+        "operationId": "core_business-type_create",
+        "description": "ประเภทธุรกิจของนายจ้าง",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/business-type/{id}/": {
+      "get": {
+        "operationId": "core_business-type_read",
+        "description": "ประเภทธุรกิจของนายจ้าง",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this ประเภทธุรกิจ.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "put": {
+        "operationId": "core_business-type_update",
+        "description": "ประเภทธุรกิจของนายจ้าง",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "patch": {
+        "operationId": "core_business-type_partial_update",
+        "description": "ประเภทธุรกิจของนายจ้าง",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/BusinessType"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "delete": {
+        "operationId": "core_business-type_delete",
+        "description": "ประเภทธุรกิจของนายจ้าง",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this ประเภทธุรกิจ.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/country/": {
+      "get": {
+        "operationId": "core_country_list",
+        "description": "ประเทศ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Country"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/country/{id}/": {
+      "get": {
+        "operationId": "core_country_read",
+        "description": "ประเทศ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this ประเภทเอกสารแนบ.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Country"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this ประเทศ.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/district/{province_id}/": {
+      "get": {
+        "operationId": "core_district_list",
+        "description": "อำเภอ",
+        "parameters": [
+          {
+            "name": "province_id",
+            "in": "path",
+            "description": "ID of the province used for filter",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of filtered district",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/District"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "province_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/core/employee/": {
+      "get": {
+        "operationId": "core_employee_list",
+        "description": "ลูกจ้าง ทั้งหมด",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "post": {
+        "operationId": "core_employee_create",
+        "description": "ลูกจ้าง ทั้งหมด",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/employee/filter/{demand_process_id}/": {
+      "get": {
+        "operationId": "core_employee_filter_list",
+        "description": "ลูกจ้างแบบ Filter ตาม demand_process",
+        "parameters": [
+          {
+            "name": "demand_process_id",
+            "in": "path",
+            "description": "ID of the demand process used for filter",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of filtered employee",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "demand_process_id",
+          "in": "path",
+          "description": "กระบวนการสมัคร",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/core/employee/{id}/": {
+      "get": {
+        "operationId": "core_employee_read",
+        "description": "ลูกจ้าง ทั้งหมด",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this ลูกจ้าง.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "put": {
+        "operationId": "core_employee_update",
+        "description": "ลูกจ้าง ทั้งหมด",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "patch": {
+        "operationId": "core_employee_partial_update",
+        "description": "ลูกจ้าง ทั้งหมด",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "delete": {
+        "operationId": "core_employee_delete",
+        "description": "ลูกจ้าง ทั้งหมด",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this ลูกจ้าง.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/employer-foreign-juristic/": {
+      "get": {
+        "operationId": "core_employer-foreign-juristic_list",
+        "description": "นายจ้าง นิติบุคคลต่างชาติ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ForeignJuristicEmployer"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/employer-foreign-juristic/{id}/": {
+      "get": {
+        "operationId": "core_employer-foreign-juristic_read",
+        "description": "นายจ้าง นิติบุคคลต่างชาติ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this นายจ้าง นิติบุคคลต่างชาติ.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ForeignJuristicEmployer"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this นายจ้าง นิติบุคคลต่างชาติ.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/employer-person/": {
+      "get": {
+        "operationId": "core_employer-person_list",
+        "description": "นายจ้าง",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PersonEmployer"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/employer-person/{id}/": {
+      "get": {
+        "operationId": "core_employer-person_read",
+        "description": "นายจ้าง",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this นายจ้าง บุคคลธรรมดา.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PersonEmployer"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this นายจ้าง บุคคลธรรมดา.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/employer-thai-juristic/": {
+      "get": {
+        "operationId": "core_employer-thai-juristic_list",
+        "description": "นายจ้าง นิติบุคคลไทย",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ThaiJuristicEmployer"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/employer-thai-juristic/{id}/": {
+      "get": {
+        "operationId": "core_employer-thai-juristic_read",
+        "description": "นายจ้าง นิติบุคคลไทย",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this นายจ้าง นิติบุคคลไทย.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ThaiJuristicEmployer"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this นายจ้าง นิติบุคคลไทย.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/employer/": {
+      "get": {
+        "operationId": "core_employer_list",
+        "description": "นายจ้าง",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employer"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/employer/{id}/": {
+      "get": {
+        "operationId": "core_employer_read",
+        "description": "นายจ้าง",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this นายจ้าง.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Employer"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this นายจ้าง.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/name-prefix/": {
+      "get": {
+        "operationId": "core_name-prefix_list",
+        "description": "คำนำหน้าชื่อ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NamePrefix"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/name-prefix/{id}/": {
+      "get": {
+        "operationId": "core_name-prefix_read",
+        "description": "คำนำหน้าชื่อ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this คำนำหน้าชื่อ.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/NamePrefix"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this คำนำหน้าชื่อ.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/nationality/": {
+      "get": {
+        "operationId": "core_nationality_list",
+        "description": "สัญชาติ",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Nationality"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/nationality/{id}/": {
+      "get": {
+        "operationId": "core_nationality_read",
+        "description": "สัญชาติ",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this สัญชาติ.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Nationality"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this สัญชาติ.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/passport/": {
+      "post": {
+        "operationId": "core_passport_create",
+        "description": "Passport",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Passport"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Passport"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/passport/{id}/": {
+      "put": {
+        "operationId": "core_passport_update",
+        "description": "Passport",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Passport"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Passport"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this passport.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/province/": {
+      "get": {
+        "operationId": "core_province_list",
+        "description": "จังหวัด",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Province"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/province/{id}/": {
+      "get": {
+        "operationId": "core_province_read",
+        "description": "จังหวัด",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this จังหวัด.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Province"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this จังหวัด.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/region/": {
+      "get": {
+        "operationId": "core_region_list",
+        "description": "ภูมิภาค",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Region"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/region/{id}/": {
+      "get": {
+        "operationId": "core_region_read",
+        "description": "ภูมิภาค",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this ภาค.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Region"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this ภาค.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/sub-district/{district_id}/": {
+      "get": {
+        "operationId": "core_sub-district_list",
+        "description": "ตำบล",
+        "parameters": [
+          {
+            "name": "district_id",
+            "in": "path",
+            "description": "ID of the district used for filter",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of filtered sub-district",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SubDistrict"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "district_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/core/thai-address/": {
+      "get": {
+        "operationId": "core_thai-address_list",
+        "description": "ที่อยู่ในประเทศไทย",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ThaiAddress"
+              }
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "post": {
+        "operationId": "core_thai-address_create",
+        "description": "ที่อยู่ในประเทศไทย",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThaiAddress"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ThaiAddress"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/thai-address/{id}/": {
+      "get": {
+        "operationId": "core_thai-address_read",
+        "description": "ที่อยู่ในประเทศไทย",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this ที่อยู่ในประเทศไทย.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ThaiAddress"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "put": {
+        "operationId": "core_thai-address_update",
+        "description": "ที่อยู่ในประเทศไทย",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThaiAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ThaiAddress"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "patch": {
+        "operationId": "core_thai-address_partial_update",
+        "description": "ที่อยู่ในประเทศไทย",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ThaiAddress"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ThaiAddress"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "delete": {
+        "operationId": "core_thai-address_delete",
+        "description": "ที่อยู่ในประเทศไทย",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this ที่อยู่ในประเทศไทย.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/core/visa/": {
+      "post": {
+        "operationId": "core_visa_create",
+        "description": "Visa",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Visa"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Visa"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": []
+    },
+    "/core/visa/{id}/": {
+      "put": {
+        "operationId": "core_visa_update",
+        "description": "Visa",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Visa"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Visa"
+            }
+          }
+        },
+        "tags": [
+          "core"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this visa.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/demand/application-form-attachment/": {
+      "get": {
+        "operationId": "demand_application-form-attachment_list",
+        "description": "Application Form Attachment",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationFormAttachment"
+              }
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "post": {
+        "operationId": "demand_application-form-attachment_create",
+        "description": "Application Form Attachment",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormAttachment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormAttachment"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": []
+    },
+    "/demand/application-form-attachment/{id}/": {
+      "get": {
+        "operationId": "demand_application-form-attachment_read",
+        "description": "Application Form Attachment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this application form attachment.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormAttachment"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "put": {
+        "operationId": "demand_application-form-attachment_update",
+        "description": "Application Form Attachment",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormAttachment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormAttachment"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "patch": {
+        "operationId": "demand_application-form-attachment_partial_update",
+        "description": "Application Form Attachment",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormAttachment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormAttachment"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "delete": {
+        "operationId": "demand_application-form-attachment_delete",
+        "description": "Application Form Attachment",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this application form attachment.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/demand/application-form-hardcopy/": {
+      "get": {
+        "operationId": "demand_application-form-hardcopy_list",
+        "description": "Application Form HardCopy",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationFormHardCopy"
+              }
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "post": {
+        "operationId": "demand_application-form-hardcopy_create",
+        "description": "Application Form HardCopy",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormHardCopy"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormHardCopy"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": []
+    },
+    "/demand/application-form-hardcopy/{id}/": {
+      "get": {
+        "operationId": "demand_application-form-hardcopy_read",
+        "description": "Application Form HardCopy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this application form hard copy.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormHardCopy"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "put": {
+        "operationId": "demand_application-form-hardcopy_update",
+        "description": "Application Form HardCopy",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormHardCopy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormHardCopy"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "patch": {
+        "operationId": "demand_application-form-hardcopy_partial_update",
+        "description": "Application Form HardCopy",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormHardCopy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormHardCopy"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "delete": {
+        "operationId": "demand_application-form-hardcopy_delete",
+        "description": "Application Form HardCopy",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this application form hard copy.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/demand/application-form/": {
+      "get": {
+        "operationId": "demand_application-form_list",
+        "description": "แบบฟอร์มสมัคร Demand process",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ApplicationForm"
+              }
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "post": {
+        "operationId": "demand_application-form_create",
+        "description": "แบบฟอร์มสมัคร Demand process",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationForm"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationForm"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": []
+    },
+    "/demand/application-form/{id}/": {
+      "get": {
+        "operationId": "demand_application-form_read",
+        "description": "แบบฟอร์มสมัคร Demand process",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this แบบฟอร์มสมัคร MOU Demand Process.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationForm"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "put": {
+        "operationId": "demand_application-form_update",
+        "description": "แบบฟอร์มสมัคร Demand process",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationForm"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "patch": {
+        "operationId": "demand_application-form_partial_update",
+        "description": "แบบฟอร์มสมัคร Demand process",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationForm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApplicationForm"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "delete": {
+        "operationId": "demand_application-form_delete",
+        "description": "แบบฟอร์มสมัคร Demand process",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this แบบฟอร์มสมัคร MOU Demand Process.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/demand/demand-process/": {
+      "get": {
+        "operationId": "demand_demand-process_list",
+        "description": "Demand Process",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DemandProcess"
+              }
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "post": {
+        "operationId": "demand_demand-process_create",
+        "description": "Demand Process",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DemandProcess"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DemandProcess"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": []
+    },
+    "/demand/demand-process/{id}/": {
+      "get": {
+        "operationId": "demand_demand-process_read",
+        "description": "Demand Process",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "A unique integer value identifying this Demand Process.",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DemandProcess"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "put": {
+        "operationId": "demand_demand-process_update",
+        "description": "Demand Process",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DemandProcess"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DemandProcess"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "patch": {
+        "operationId": "demand_demand-process_partial_update",
+        "description": "Demand Process",
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DemandProcess"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DemandProcess"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "delete": {
+        "operationId": "demand_demand-process_delete",
+        "description": "Demand Process",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "A unique integer value identifying this Demand Process.",
+          "required": true,
+          "type": "integer"
+        }
+      ]
+    },
+    "/demand/generate-application-form/{id}/": {
+      "get": {
+        "operationId": "demand_generate-application-form_read",
+        "description": "Generate the application form into PDF file",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/demand/generate-employee-import-form/{employee_id}/": {
+      "get": {
+        "operationId": "demand_generate-employee-import-form_read",
+        "description": "Get ตท.2 PDF of the given employee ID",
+        "parameters": [
+          {
+            "name": "employee_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "demand"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "employee_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "JSONWebToken": {
+      "required": [
+        "username",
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "username": {
+          "title": "Username",
+          "type": "string",
+          "minLength": 1
+        },
+        "password": {
+          "title": "Password",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "RefreshJSONWebToken": {
+      "required": [
+        "token"
+      ],
+      "type": "object",
+      "properties": {
+        "token": {
+          "title": "Token",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "VerifyJSONWebToken": {
+      "required": [
+        "token"
+      ],
+      "type": "object",
+      "properties": {
+        "token": {
+          "title": "Token",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "Passport": {
+      "required": [
+        "date_of_issue",
+        "valid_until",
+        "no",
+        "issued_at",
+        "employee",
+        "issued_country"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "date_of_issue": {
+          "title": "Date of issue",
+          "type": "string",
+          "format": "date"
+        },
+        "valid_until": {
+          "title": "Valid until",
+          "type": "string",
+          "format": "date"
+        },
+        "type": {
+          "title": "Type",
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "document_type_name_th": {
+          "title": "Document type name th",
+          "description": "ชื่อของเอกสารที่ใช้แทน Passport (TH)",
+          "type": "string",
+          "x-nullable": true
+        },
+        "document_type_name_en": {
+          "title": "Document type name en",
+          "description": "ชื่อของเอกสารที่ใช้แทน Passport (EN)",
+          "type": "string",
+          "x-nullable": true
+        },
+        "no": {
+          "title": "No",
+          "description": "เลขที่",
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "issued_at": {
+          "title": "Issued at",
+          "description": "ออกให้ที่",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "employee": {
+          "title": "Employee",
+          "description": "ลูกจ้าง",
+          "type": "integer"
+        },
+        "issued_country": {
+          "title": "Issued country",
+          "description": "ประเทศที่ออก",
+          "type": "integer"
+        }
+      }
+    },
+    "Agency": {
+      "required": [
+        "name_th",
+        "name_en",
+        "address_th",
+        "address_en"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "description": "ชื่อบริษัทต้นทาง (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "description": "ชื่อบริษัทต้นทาง (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "address_th": {
+          "title": "Address th",
+          "description": "ที่อยู่ในต่างประเทศ (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "address_en": {
+          "title": "Address en",
+          "description": "ที่อยู่ในต่างประเทศ (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        }
+      }
+    },
+    "AttachmentType": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "description": "ชื่อประเภทเอกสาร",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        }
+      }
+    },
+    "BusinessType": {
+      "required": [
+        "name_th",
+        "name_en"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "description": "ประเภทธุรกิจ (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "description": "ประเภทธุรกิจ (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        }
+      }
+    },
+    "Country": {
+      "required": [
+        "code",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "display_seq": {
+          "title": "Display seq",
+          "description": "ลำดับการแสดงผล",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "code": {
+          "title": "Code",
+          "description": "รหัสประเทศ",
+          "type": "string",
+          "maxLength": 10,
+          "minLength": 1
+        },
+        "name": {
+          "title": "Name",
+          "description": "ชื่อประเทศ",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        }
+      }
+    },
+    "District": {
+      "required": [
+        "name_th",
+        "name_en",
+        "province"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "province": {
+          "title": "Province",
+          "type": "integer"
+        }
+      }
+    },
+    "Employee": {
+      "required": [
+        "date_of_birth",
+        "name_th",
+        "name_en",
+        "foreign_address_post_code",
+        "name_prefix",
+        "foreign_address_country"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "date_of_birth": {
+          "title": "Date of birth",
+          "type": "string",
+          "format": "date"
+        },
+        "name_th": {
+          "title": "Name th",
+          "description": "ชื่อลูกจ้าง (TH)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "description": "ชื่อลูกจ้าง (EN)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "foreign_address": {
+          "title": "Foreign address",
+          "description": "ที่อยู่ในต่างประเทศ",
+          "type": "string",
+          "x-nullable": true
+        },
+        "foreign_address_post_code": {
+          "title": "Foreign address post code",
+          "description": "รหัสไปรษณีย์ (ต่างประเทศ)",
+          "type": "string",
+          "maxLength": 300,
+          "minLength": 1
+        },
+        "demand_process": {
+          "title": "Demand process",
+          "description": "กระบวนการสมัคร",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "name_prefix": {
+          "title": "Name prefix",
+          "type": "integer"
+        },
+        "nationality": {
+          "title": "Nationality",
+          "description": "สัญชาติ",
+          "type": "integer"
+        },
+        "employer": {
+          "title": "Employer",
+          "description": "นายจ้าง",
+          "type": "integer"
+        },
+        "foreign_address_country": {
+          "title": "Foreign address country",
+          "description": "ประเทศที่อยู่",
+          "type": "integer"
+        }
+      }
+    },
+    "ForeignJuristicEmployer": {
+      "required": [
+        "name_th",
+        "name_en",
+        "business_type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "description": "ชื่อนายจ้างหรือบริษัท (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "description": "ชื่อนายจ้างหรือบริษัท (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "telephone": {
+          "title": "Telephone",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "fax": {
+          "title": "Fax",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "registered_date": {
+          "title": "Registered date",
+          "description": "วันที่จดทะเบียน",
+          "type": "string",
+          "format": "date",
+          "x-nullable": true
+        },
+        "money_importation": {
+          "title": "Money importation",
+          "description": "จำนวนเงินนำเข้าจากต่างประเทศ",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "x-nullable": true
+        },
+        "passport_id": {
+          "title": "Passport id",
+          "description": "หมายเลข passport",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "x-nullable": true
+        },
+        "specific_type": {
+          "title": "Specific type",
+          "type": "integer",
+          "readOnly": true
+        },
+        "business_type": {
+          "title": "Business type",
+          "type": "integer"
+        },
+        "address": {
+          "title": "Address",
+          "type": "integer",
+          "x-nullable": true
+        }
+      }
+    },
+    "PersonEmployer": {
+      "required": [
+        "name_th",
+        "name_en",
+        "personal_card_id",
+        "business_type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "description": "ชื่อนายจ้างหรือบริษัท (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "description": "ชื่อนายจ้างหรือบริษัท (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "telephone": {
+          "title": "Telephone",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "fax": {
+          "title": "Fax",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "personal_card_id": {
+          "title": "Personal card id",
+          "description": "เลขที่บัตรประชาชน/Passport",
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "work_permit_no": {
+          "title": "Work permit no",
+          "description": "เลขที่ใบอนุญาตทำงาน",
+          "type": "string",
+          "maxLength": 1000,
+          "x-nullable": true
+        },
+        "specific_type": {
+          "title": "Specific type",
+          "type": "integer",
+          "readOnly": true
+        },
+        "business_type": {
+          "title": "Business type",
+          "type": "integer"
+        },
+        "address": {
+          "title": "Address",
+          "type": "integer",
+          "x-nullable": true
+        }
+      }
+    },
+    "ThaiJuristicEmployer": {
+      "required": [
+        "name_th",
+        "name_en",
+        "juristic_no",
+        "taxpayer_id",
+        "individual_name_th",
+        "individual_name_en",
+        "business_type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "description": "ชื่อนายจ้างหรือบริษัท (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "description": "ชื่อนายจ้างหรือบริษัท (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "telephone": {
+          "title": "Telephone",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "fax": {
+          "title": "Fax",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "registered_date": {
+          "title": "Registered date",
+          "description": "วันที่จดทะเบียน",
+          "type": "string",
+          "format": "date",
+          "x-nullable": true
+        },
+        "juristic_no": {
+          "title": "Juristic no",
+          "description": "เลขที่นิติบุคคล",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        },
+        "taxpayer_id": {
+          "title": "Taxpayer id",
+          "description": "เลขประจำตัวผู้เสียภาษี (นิติบุคคล)",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        },
+        "individual_name_th": {
+          "title": "Individual name th",
+          "description": "ชื่อนายจ้าง (กรรมการ) (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "individual_name_en": {
+          "title": "Individual name en",
+          "description": "ชื่อนายจ้าง (กรรมการ) (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "individual_id": {
+          "title": "Individual id",
+          "description": "เลขบัตรประชาชน/หนังสือเดินทาง (กรรมการ)",
+          "type": "string",
+          "maxLength": 1000,
+          "x-nullable": true
+        },
+        "paid_up_capital": {
+          "title": "Paid up capital",
+          "description": "ทุนจดทะเบียนชำระแล้ว (บาท)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648,
+          "x-nullable": true
+        },
+        "specific_type": {
+          "title": "Specific type",
+          "type": "integer",
+          "readOnly": true
+        },
+        "business_type": {
+          "title": "Business type",
+          "type": "integer"
+        },
+        "address": {
+          "title": "Address",
+          "type": "integer",
+          "x-nullable": true
+        }
+      }
+    },
+    "Employer": {
+      "required": [
+        "name_th",
+        "name_en",
+        "business_type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "specific_type": {
+          "title": "Specific type",
+          "type": "string",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "description": "ชื่อนายจ้างหรือบริษัท (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "description": "ชื่อนายจ้างหรือบริษัท (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "minLength": 1
+        },
+        "telephone": {
+          "title": "Telephone",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "fax": {
+          "title": "Fax",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "business_type": {
+          "title": "Business type",
+          "type": "integer"
+        },
+        "address": {
+          "title": "Address",
+          "type": "integer",
+          "x-nullable": true
+        }
+      }
+    },
+    "NamePrefix": {
+      "required": [
+        "name_th",
+        "name_en"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "display_seq": {
+          "title": "Display seq",
+          "description": "ลำดับการแสดงผล",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "name_th": {
+          "title": "Name th",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        }
+      }
+    },
+    "Nationality": {
+      "required": [
+        "name_th",
+        "name_en"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        }
+      }
+    },
+    "Province": {
+      "required": [
+        "name_th",
+        "name_en",
+        "region"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "region": {
+          "title": "Region",
+          "type": "integer"
+        }
+      }
+    },
+    "Region": {
+      "required": [
+        "name_th",
+        "name_en"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        }
+      }
+    },
+    "SubDistrict": {
+      "required": [
+        "name_th",
+        "name_en",
+        "zip_code",
+        "district"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name_th": {
+          "title": "Name th",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "name_en": {
+          "title": "Name en",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "zip_code": {
+          "title": "Zip code",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "district": {
+          "title": "District",
+          "type": "integer"
+        }
+      }
+    },
+    "ThaiAddress": {
+      "required": [
+        "no",
+        "sub_district"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "no": {
+          "title": "No",
+          "description": "เลขที่",
+          "type": "string",
+          "maxLength": 500,
+          "minLength": 1
+        },
+        "building_th": {
+          "title": "Building th",
+          "description": "ชื่ออาคาร/หมู่บ้าน (th)",
+          "type": "string",
+          "maxLength": 1000,
+          "x-nullable": true
+        },
+        "building_en": {
+          "title": "Building en",
+          "description": "ชื่ออาคาร/หมู่บ้าน (en)",
+          "type": "string",
+          "maxLength": 1000,
+          "x-nullable": true
+        },
+        "floor": {
+          "title": "Floor",
+          "description": "ชั้นที่",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "moo": {
+          "title": "Moo",
+          "description": "หมู่ที่",
+          "type": "string",
+          "maxLength": 500,
+          "x-nullable": true
+        },
+        "soi_th": {
+          "title": "Soi th",
+          "description": "ซอย (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "x-nullable": true
+        },
+        "soi_en": {
+          "title": "Soi en",
+          "description": "ซอย (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "x-nullable": true
+        },
+        "road_th": {
+          "title": "Road th",
+          "description": "ถนน (th)",
+          "type": "string",
+          "maxLength": 3000,
+          "x-nullable": true
+        },
+        "road_en": {
+          "title": "Road en",
+          "description": "ถนน (en)",
+          "type": "string",
+          "maxLength": 3000,
+          "x-nullable": true
+        },
+        "sub_district": {
+          "title": "Sub district",
+          "type": "integer"
+        }
+      }
+    },
+    "Visa": {
+      "required": [
+        "date_of_issue",
+        "valid_until",
+        "date_of_arrival",
+        "stay_in_thai_util",
+        "type",
+        "no",
+        "issued_at",
+        "immigration_checkout",
+        "employee"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "date_of_issue": {
+          "title": "Date of issue",
+          "type": "string",
+          "format": "date"
+        },
+        "valid_until": {
+          "title": "Valid until",
+          "type": "string",
+          "format": "date"
+        },
+        "date_of_arrival": {
+          "title": "Date of arrival",
+          "type": "string",
+          "format": "date"
+        },
+        "stay_in_thai_util": {
+          "title": "Stay in thai util",
+          "type": "string",
+          "format": "date"
+        },
+        "type": {
+          "title": "Type",
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "no": {
+          "title": "No",
+          "description": "เลขที่",
+          "type": "string",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "issued_at": {
+          "title": "Issued at",
+          "description": "ออกให้ที่",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        },
+        "immigration_checkout": {
+          "title": "Immigration checkout",
+          "description": "สถานที่ได้รับอนุญาตจากพนักงานตรวจคนเข้าเมือง",
+          "type": "string",
+          "maxLength": 1000,
+          "minLength": 1
+        },
+        "is_active": {
+          "title": "Is active",
+          "type": "boolean"
+        },
+        "employee": {
+          "title": "Employee",
+          "description": "ลูกจ้าง",
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationFormAttachment": {
+      "required": [
+        "file",
+        "application_form",
+        "attachment_type"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "file": {
+          "title": "File",
+          "type": "string"
+        },
+        "application_form": {
+          "title": "Application form",
+          "type": "integer"
+        },
+        "attachment_type": {
+          "title": "Attachment type",
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationFormHardCopy": {
+      "required": [
+        "file",
+        "application_form"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "file": {
+          "title": "File",
+          "type": "string"
+        },
+        "application_form": {
+          "title": "Application form",
+          "type": "integer"
+        }
+      }
+    },
+    "ApplicationForm": {
+      "required": [
+        "qualification_age_from",
+        "qualification_age_to",
+        "qualification_height_from",
+        "qualification_height_to",
+        "qualification_weight_from",
+        "qualification_weight_to",
+        "period_of_employment_year",
+        "wage",
+        "working_hour",
+        "immigration_checkpoint_th",
+        "immigration_checkpoint_en",
+        "power_of_attroney_withness_th",
+        "power_of_attroney_withness_en",
+        "reason_of_employment",
+        "process_time",
+        "demand_process",
+        "place_of_work",
+        "traning_province"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "agency_power_attroney_date": {
+          "title": "Agency power attroney date",
+          "type": "string",
+          "format": "date"
+        },
+        "labourer_male": {
+          "title": "Labourer male",
+          "description": "จำนวนกรรมกร (ชาย)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "labourer_female": {
+          "title": "Labourer female",
+          "description": "จำนวนกรรมกร (หญิง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "domestic_worker_male": {
+          "title": "Domestic worker male",
+          "description": "จำนวนรับใช้ในบ้าน (ชาย)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "domestic_worker_female": {
+          "title": "Domestic worker female",
+          "description": "จำนวนรับใช้ในบ้าน (หญิง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "mechanic_fishing_male": {
+          "title": "Mechanic fishing male",
+          "description": "จำนวนช่างเครื่องยนต์ในเรือประมง (ชาย)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "mechanic_fishing_female": {
+          "title": "Mechanic fishing female",
+          "description": "จำนวนช่างเครื่องยนต์ในเรือประมง (หญิง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "other_male": {
+          "title": "Other male",
+          "description": "จำนวนอื่นๆ (ชาย)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "other_female": {
+          "title": "Other female",
+          "description": "จำนวนอื่นๆ (หญิง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "other_name_th": {
+          "title": "Other name th",
+          "description": "ชื่องานอื่นๆ (th)",
+          "type": "string",
+          "x-nullable": true
+        },
+        "other_name_en": {
+          "title": "Other name en",
+          "description": "ชื่องานอื่นๆ (en)",
+          "type": "string",
+          "x-nullable": true
+        },
+        "qualification_age_from": {
+          "title": "Qualification age from",
+          "description": "คุณสมบัติที่ต้องการ (อายุตั้งแต่)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "qualification_age_to": {
+          "title": "Qualification age to",
+          "description": "คุณสมบัติที่ต้องการ (อายุถึง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "qualification_height_from": {
+          "title": "Qualification height from",
+          "description": "คุณสมบัติที่ต้องการ (ส่วนสูงตั้งแต่)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "qualification_height_to": {
+          "title": "Qualification height to",
+          "description": "คุณสมบัติที่ต้องการ (ส่วนสูงถึง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "qualification_weight_from": {
+          "title": "Qualification weight from",
+          "description": "คุณสมบัติที่ต้องการ (น้ำหนักตั้งแต่)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "qualification_weight_to": {
+          "title": "Qualification weight to",
+          "description": "คุณสมบัติที่ต้องการ (น้ำหนักถึง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "period_of_employment_year": {
+          "title": "Period of employment year",
+          "description": "ระยะเวลาการจ้าง (ปี)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "wage": {
+          "title": "Wage",
+          "description": "ค่าจ้าง",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "working_hour": {
+          "title": "Working hour",
+          "description": "ชั่วโมงการทำงาน (ชั่วโมง)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "weekly_holiday_th": {
+          "title": "Weekly holiday th",
+          "description": "วันหยุดประจำสัปดาห์ (TH)",
+          "type": "string",
+          "minLength": 1
+        },
+        "weekly_holiday_en": {
+          "title": "Weekly holiday en",
+          "description": "วันหยุดประจำสัปดาห์ (EN)",
+          "type": "string",
+          "minLength": 1
+        },
+        "thai_official_holiday_th": {
+          "title": "Thai official holiday th",
+          "description": "วันหยุดตามประเพณี (TH)",
+          "type": "string",
+          "minLength": 1
+        },
+        "thai_official_holiday_en": {
+          "title": "Thai official holiday en",
+          "description": "วันหยุดตามประเพณี (EN)",
+          "type": "string",
+          "minLength": 1
+        },
+        "annual_leave_day_th": {
+          "title": "Annual leave day th",
+          "description": "วันหยุดประจำปี​​ (TH)",
+          "type": "string",
+          "minLength": 1
+        },
+        "annual_leave_day_en": {
+          "title": "Annual leave day en",
+          "description": "วันหยุดประจำปี​​ (EN)",
+          "type": "string",
+          "minLength": 1
+        },
+        "immigration_checkpoint_th": {
+          "title": "ด่านตรวจคนเข้าเมือง (ไทย)",
+          "type": "string",
+          "minLength": 1
+        },
+        "immigration_checkpoint_en": {
+          "title": "ด่านตรวจคนเข้าเมือง (อังกฤษ)",
+          "type": "string",
+          "minLength": 1
+        },
+        "power_of_attroney_withness_th": {
+          "title": "Power of attroney withness th",
+          "description": "ชื่อพยานในหนังสือแต่งตั้ง (th)",
+          "type": "string",
+          "minLength": 1
+        },
+        "power_of_attroney_withness_en": {
+          "title": "Power of attroney withness en",
+          "description": "ชื่อพยานในหนังสือแต่งตั้ง (en)",
+          "type": "string",
+          "minLength": 1
+        },
+        "reason_of_employment": {
+          "title": "Reason of employment",
+          "description": "เหตุผลการจ้างงาน (แบบหนังสือรับรองการจ้าง)",
+          "type": "string",
+          "minLength": 1
+        },
+        "process_time": {
+          "title": "Process time",
+          "description": "ระยะเวลาในการดำเนินการ (สัญญาจ้างใหม่แนบดีมาน)",
+          "type": "integer",
+          "maximum": 2147483647,
+          "minimum": -2147483648
+        },
+        "demand_process": {
+          "title": "Demand process",
+          "type": "integer"
+        },
+        "place_of_work": {
+          "title": "Place of work",
+          "description": "สถานที่ทำงานในไทย",
+          "type": "integer"
+        },
+        "traning_province": {
+          "title": "Traning province",
+          "description": "ศูนย์ประจำจังหวัดที่เข้าอบรม",
+          "type": "integer"
+        }
+      }
+    },
+    "DemandProcess": {
+      "required": [
+        "employer",
+        "nationality",
+        "agency"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "employer": {
+          "title": "Employer",
+          "description": "นายจ้าง",
+          "type": "integer"
+        },
+        "nationality": {
+          "title": "Nationality",
+          "description": "สัญชาติ",
+          "type": "integer"
+        },
+        "agency": {
+          "title": "Agency",
+          "description": "บริษัทต้นทาง",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
