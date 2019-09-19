@@ -2795,7 +2795,7 @@
         },
         "specific_type": {
           "title": "Specific type",
-          "type": "integer",
+          "type": "string",
           "readOnly": true
         },
         "business_type": {
