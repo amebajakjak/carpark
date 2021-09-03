@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Get Workflow Instance",
+    "contact": {
+      "email": "damrongchai@cumulus.co.th"
+    }
+  },
+  "host": "au.nintex.io",
+  "basePath": "/workflows/v1/",
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "instances",
+      "description": ""
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/instances/{instance_id}": {
+      "get": {
+        "tags": [
+          "instances"
+        ],
+        "operationId": "api-instance",
+        "summary": "Get a workflow instance",
+        "description": "",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instance_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/instance_response"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "instance_response": {
+      "type": "object",
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/actions"
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "actionInstanceId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string"
+        },
+        "startDateTime": {
+          "type": "string"
+        },
+        "endDateTime": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "logMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
