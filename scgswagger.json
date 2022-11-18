@@ -11,6 +11,7 @@
   "paths": {
     "/api/token": {
       "post": {
+        "operationId": "Get_Token",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -30,11 +31,9 @@
             "default": "f394580c-47c2-482b-b596-50c350feb5b4"
           },
           {
-            "in": "body",
+            "in": "formData",
             "name": "grant_type",
-            "schema": {
-              "$ref": "#/definitions/RequestBody"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -55,14 +54,6 @@
     }
   },
   "definitions": {
-    "RequestBody": {
-      "type": "object",
-      "properties": {
-        "grant_type": {
-          "type": "string"
-        }
-      }
-    },
     "AccessToken": {
       "type": "object",
       "properties": {
