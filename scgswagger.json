@@ -1,0 +1,89 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "scgp-gdc-api-dev.azurewebsites.net Token"
+  },
+  "host": "scgp-gdc-api-dev.azurewebsites.net",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/api/token": {
+      "post": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "ApplicationId",
+            "type": "string",
+            "required": true,
+            "default": "19e7b6a6-9955-430f-bb36-0bbe823d4564"
+          },
+          {
+            "in": "header",
+            "name": "SecretKey",
+            "type": "string",
+            "required": true,
+            "default": "f394580c-47c2-482b-b596-50c350feb5b4"
+          },
+          {
+            "in": "body",
+            "name": "grant_type",
+            "schema": {
+              "$ref": "#/definitions/RequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccessToken"
+            }
+          },
+          "400": {
+            "description": "error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RequestBody": {
+      "type": "object",
+      "properties": {
+        "grant_type": {
+          "type": "string"
+        }
+      }
+    },
+    "AccessToken": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "token_type": {
+          "type": "string"
+        },
+        "expires_in": {
+          "type": "integer"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
