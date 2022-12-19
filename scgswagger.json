@@ -21,14 +21,14 @@
             "name": "ApplicationId",
             "type": "string",
             "required": true,
-            "default": "19e7b6a6-9955-430f-bb36-0bbe823d4564"
+
           },
           {
             "in": "header",
             "name": "SecretKey",
             "type": "string",
             "required": true,
-            "default": "f394580c-47c2-482b-b596-50c350feb5b4"
+
           },
           {
             "in": "formData",
