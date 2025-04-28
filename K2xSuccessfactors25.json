@@ -1,0 +1,786 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "K2 x Successfactors"
+  },
+  "host": "a4czfrvej.accounts.ondemand.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/oauth/idp": {
+      "post": {
+        "operationId": "SAML_ASSERTION",
+        "tags": [
+          "Oauth"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "client_id",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "user_id",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "token_url",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "private_key",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "example": "XXXX1101XXXX"
+            }
+          }
+        }
+      }
+    },
+    "/oauth2/token": {
+      "post": {
+        "operationId": "GET_TOKEN",
+        "tags": [
+          "Oauth"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grant_type",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "password",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "client_id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TOKEN"
+            }
+          },
+          "401": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/error_Message"
+            }
+          }
+        }
+      }
+    },
+    "/odata/v2/cust_bnBAPITV": {
+      "post": {
+        "operationId": "POST_INSERT_CUST_BNBAPITV",
+        "tags": [
+          "cust_bnBAPITV"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pJSON",
+            "schema": {
+              "type": "object",
+              "required": [
+                "externalCode"
+              ],
+              "properties": {
+                "externalCode": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/odata/v2/cust_bnBAPITV({externalCode})": {
+      "post": {
+        "operationId": "POST_UPDATE_CUST_BNBAPITV",
+        "tags": [
+          "cust_bnBAPITV"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "externalCode",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "pJSON",
+            "schema": {
+              "type": "object",
+              "required": [
+                "externalCode"
+              ],
+              "properties": {
+                "externalCode": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DELETE_CUST_BNBAPITV",
+        "tags": [
+          "cust_bnBAPITV"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "externalCode",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "pJSON",
+            "schema": {
+              "type": "object",
+              "required": [
+                "externalCode"
+              ],
+              "properties": {
+                "externalCode": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "GET_CUST_BNBAPITV",
+        "tags": [
+          "cust_bnBAPITV"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "externalCode",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/cust_bnBAPITV_results"
+            }
+          }
+        }
+      }
+    },
+    "/odata/v2/cust_bnBAPITVInfo(cust_bnBAPITV_externalCode={cust_bnBAPITV_externalCode},externalCode={externalCode})": {
+      "post": {
+        "operationId": "POST_UPDATE_CUST_BNBAPITVINFO",
+        "tags": [
+          "cust_bnBAPITVInfo"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cust_bnBAPITV_externalCode",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "externalCode",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "pJSON",
+            "schema": {
+              "type": "object",
+              "required": [
+                "externalCode",
+                "cust_pDate"
+              ],
+              "properties": {
+                "externalCode": {
+                  "type": "string"
+                },
+                "cust_pDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DELETE_CUST_BNBAPITVINFO",
+        "tags": [
+          "cust_bnBAPITVInfo"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cust_bnBAPITV_externalCode",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "externalCode",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "pJSON",
+            "schema": {
+              "type": "object",
+              "required": [
+                "externalCode",
+                "cust_pDate"
+              ],
+              "properties": {
+                "externalCode": {
+                  "type": "string"
+                },
+                "cust_pDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/odata/v2/cust_bnBAPITVInfo": {
+      "post": {
+        "operationId": "POST_INSERT_CUST_BNBAPITVINFO",
+        "tags": [
+          "cust_bnBAPITVInfo"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "pJSON",
+            "schema": {
+              "type": "object",
+              "required": [
+                "externalCode",
+                "cust_pDate"
+              ],
+              "properties": {
+                "externalCode": {
+                  "type": "string"
+                },
+                "cust_pDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "operationId": "GET_CUST_BNBAPITVINFO",
+        "tags": [
+          "cust_bnBAPITVInfo"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/cust_bnBAPITVInfo_results"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "object",
+          "$ref": "#/definitions/error_Message"
+        }
+      }
+    },
+    "error_Message": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "error_description": {
+          "type": "string"
+        }
+      }
+    },
+    "TOKEN": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "refresh_token": {
+          "type": "string"
+        },
+        "id_token": {
+          "type": "string"
+        },
+        "token_type": {
+          "type": "string"
+        },
+        "expires_in": {
+          "type": "integer"
+        }
+      }
+    },
+    "__metadata": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "cust_bnBAPITV_results": {
+      "type": "object",
+      "properties": {
+        "d": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/cust_bnBAPITV"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cust_bnBAPITVInfo_results": {
+      "type": "object",
+      "properties": {
+        "d": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/cust_bnBAPITVInfo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cust_bnBAPITV": {
+      "type": "object",
+      "properties": {
+        "__metadata": {
+          "type": "object",
+          "$ref": "#/definitions/__metadata"
+        },
+        "externalCode": {
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string"
+        },
+        "mdfSystemRecordStatus": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "externalName": {
+          "type": "string"
+        },
+        "cust_pDate": {
+          "type": "string"
+        },
+        "externalCodeNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "createdByNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "wfRequestNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "lastModifiedByNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "cust_BAPI": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "mdfSystemRecordStatusNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "cust_bnBAPITVInfo": {
+      "type": "object",
+      "properties": {
+        "__metadata": {
+          "type": "object",
+          "$ref": "#/definitions/__metadata"
+        },
+        "cust_bnBAPITV_externalCode": {
+          "type": "string"
+        },
+        "externalCode": {
+          "type": "string"
+        },
+        "cust_msg": {
+          "type": "string"
+        },
+        "cust_msgType": {
+          "type": "string"
+        },
+        "lastModifiedDateTime": {
+          "type": "string"
+        },
+        "cust_periodUnit": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string"
+        },
+        "cust_latestClaimDate": {
+          "type": "string"
+        },
+        "cust_lastModifiedDate": {
+          "type": "string"
+        },
+        "cust_nextClaimStartDate": {
+          "type": "string"
+        },
+        "cust_remainingAmount": {
+          "type": "string"
+        },
+        "cust_accumulatedAmount": {
+          "type": "string"
+        },
+        "externalName": {
+          "type": "string"
+        },
+        "cust_periodUnitGO": {
+          "type": "string"
+        },
+        "cust_dependentOBJID": {
+          "type": "string"
+        },
+        "cust_flagLastDate": {
+          "type": "string"
+        },
+        "cust_benefitNameEN": {
+          "type": "string"
+        },
+        "cust_quotaText": {
+          "type": "string"
+        },
+        "cust_claimNumber": {
+          "type": "string"
+        },
+        "cust_dependentType": {
+          "type": "string"
+        },
+        "cust_claimLimitAmount": {
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string"
+        },
+        "cust_benefitNameTH": {
+          "type": "string"
+        },
+        "cust_claimLimitPerPeriod": {
+          "type": "string"
+        },
+        "mdfSystemRecordStatus": {
+          "type": "string"
+        },
+        "cust_currency": {
+          "type": "string"
+        },
+        "cust_remainingClaimNumber": {
+          "type": "string"
+        },
+        "cust_optionID": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "cust_period": {
+          "type": "string"
+        },
+        "cust_dependentName": {
+          "type": "string"
+        },
+        "cust_checkDate": {
+          "type": "string"
+        },
+        "cust_company": {
+          "type": "string"
+        },
+        "cust_dclmx": {
+          "type": "string"
+        },
+        "cust_quota": {
+          "type": "string"
+        },
+        "createdByNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "lastModifiedByNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "mdfSystemRecordStatusNav": {
+          "type": "object",
+          "properties": {
+            "__deferred": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
